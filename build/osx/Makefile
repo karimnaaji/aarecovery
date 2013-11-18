@@ -114,6 +114,30 @@ aarecovery.out/fast:
 	$(MAKE) -f CMakeFiles/aarecovery.out.dir/build.make CMakeFiles/aarecovery.out.dir/build
 .PHONY : aarecovery.out/fast
 
+src/aarecovery.o: src/aarecovery.cpp.o
+.PHONY : src/aarecovery.o
+
+# target to build an object file
+src/aarecovery.cpp.o:
+	$(MAKE) -f CMakeFiles/aarecovery.out.dir/build.make CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o
+.PHONY : src/aarecovery.cpp.o
+
+src/aarecovery.i: src/aarecovery.cpp.i
+.PHONY : src/aarecovery.i
+
+# target to preprocess a source file
+src/aarecovery.cpp.i:
+	$(MAKE) -f CMakeFiles/aarecovery.out.dir/build.make CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.i
+.PHONY : src/aarecovery.cpp.i
+
+src/aarecovery.s: src/aarecovery.cpp.s
+.PHONY : src/aarecovery.s
+
+# target to generate assembly for a file
+src/aarecovery.cpp.s:
+	$(MAKE) -f CMakeFiles/aarecovery.out.dir/build.make CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.s
+.PHONY : src/aarecovery.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -195,6 +219,9 @@ help:
 	@echo "... aarecovery.out"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... src/aarecovery.o"
+	@echo "... src/aarecovery.i"
+	@echo "... src/aarecovery.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

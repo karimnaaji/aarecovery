@@ -6,14 +6,19 @@
 
 class PGMImage {
     public:
+        PGMImage();
         PGMImage(int length, int width, int grayscale);
+        PGMImage(const PGMImage& image);
+        PGMImage& operator=(const PGMImage& image);
         ~PGMImage();
     
         float operator()(int i, int j) const;
         float& operator()(int i, int j);
-        unsigned int getLength();
-        unsigned int getWidth();
-        unsigned int getGrayScale();
+        unsigned int getLength() const;
+        unsigned int getWidth() const;
+        unsigned int getGrayscale() const;
+
+        void threshold(float threshold, float newValue);
     private:
         std::string filename;
         unsigned int length;

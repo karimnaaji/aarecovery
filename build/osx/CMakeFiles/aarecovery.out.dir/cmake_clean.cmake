@@ -1,4 +1,5 @@
 FILE(REMOVE_RECURSE
+  "CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o"
   "CMakeFiles/aarecovery.out.dir/src/main.cpp.o"
   "CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o"
   "CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o"

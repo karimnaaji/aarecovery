@@ -52,9 +52,32 @@ include CMakeFiles/aarecovery.out.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/aarecovery.out.dir/flags.make
 
+CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o: CMakeFiles/aarecovery.out.dir/flags.make
+CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o: ../../src/aarecovery.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/build/osx/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o -c /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/src/aarecovery.cpp
+
+CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/src/aarecovery.cpp > CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.i
+
+CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/src/aarecovery.cpp -o CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.s
+
+CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o.requires:
+.PHONY : CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o.requires
+
+CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o.provides: CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o.requires
+	$(MAKE) -f CMakeFiles/aarecovery.out.dir/build.make CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o.provides.build
+.PHONY : CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o.provides
+
+CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o.provides.build: CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o
+
 CMakeFiles/aarecovery.out.dir/src/main.cpp.o: CMakeFiles/aarecovery.out.dir/flags.make
 CMakeFiles/aarecovery.out.dir/src/main.cpp.o: ../../src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/build/osx/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/build/osx/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/aarecovery.out.dir/src/main.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/aarecovery.out.dir/src/main.cpp.o -c /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/src/main.cpp
 
@@ -77,7 +100,7 @@ CMakeFiles/aarecovery.out.dir/src/main.cpp.o.provides.build: CMakeFiles/aarecove
 
 CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o: CMakeFiles/aarecovery.out.dir/flags.make
 CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o: ../../src/pgmimage.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/build/osx/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/build/osx/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o -c /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/src/pgmimage.cpp
 
@@ -100,7 +123,7 @@ CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o.provides.build: CMakeFiles/aare
 
 CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o: CMakeFiles/aarecovery.out.dir/flags.make
 CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o: ../../src/pgmloader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/build/osx/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/build/osx/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o -c /Users/karimnaaji/Documents/programmation/projets/aarecovery_project/src/pgmloader.cpp
 
@@ -123,6 +146,7 @@ CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o.provides.build: CMakeFiles/aar
 
 # Object files for target aarecovery.out
 aarecovery_out_OBJECTS = \
+"CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o" \
 "CMakeFiles/aarecovery.out.dir/src/main.cpp.o" \
 "CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o" \
 "CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o"
@@ -130,6 +154,7 @@ aarecovery_out_OBJECTS = \
 # External object files for target aarecovery.out
 aarecovery_out_EXTERNAL_OBJECTS =
 
+aarecovery.out: CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o
 aarecovery.out: CMakeFiles/aarecovery.out.dir/src/main.cpp.o
 aarecovery.out: CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o
 aarecovery.out: CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o
@@ -142,6 +167,7 @@ aarecovery.out: CMakeFiles/aarecovery.out.dir/link.txt
 CMakeFiles/aarecovery.out.dir/build: aarecovery.out
 .PHONY : CMakeFiles/aarecovery.out.dir/build
 
+CMakeFiles/aarecovery.out.dir/requires: CMakeFiles/aarecovery.out.dir/src/aarecovery.cpp.o.requires
 CMakeFiles/aarecovery.out.dir/requires: CMakeFiles/aarecovery.out.dir/src/main.cpp.o.requires
 CMakeFiles/aarecovery.out.dir/requires: CMakeFiles/aarecovery.out.dir/src/pgmimage.cpp.o.requires
 CMakeFiles/aarecovery.out.dir/requires: CMakeFiles/aarecovery.out.dir/src/pgmloader.cpp.o.requires
