@@ -1,11 +1,13 @@
 #include <iostream>
 
 #include "pgmimage.h"
-#include "pgmloader.h"
+#include "netpbmloader.h"
 #include "aarecovery.h"
+#include "vector3d.h"
 
 int main() {
-    PGMImage original = PGMLoader::load("photograph");
+    NetPBMLoader loader;
+    PGMImage original = loader.loadPGM("photograph");
     PGMImage filtered(original);
     PGMImage recovered;
 
@@ -14,7 +16,8 @@ int main() {
     std::cout << "Performing anti-aliasing recovery" << std::endl;
     recovered = AARecovery::PerformAA(original, filtered);
 
-    PGMLoader::save(filtered, "photograph_filtered");
-    PGMLoader::save(recovered, "photograph_recovered");
+    loader.savePGM(filtered, "photograph_filtered");
+    loader.savePGM(recovered, "photograph_recovered");
+
     return 0;
 }

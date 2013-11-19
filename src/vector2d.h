@@ -6,11 +6,11 @@
 
 class Vector2D {
     public:
-        double x;
-        double y;
+        float x;
+        float y;
         
         Vector2D();
-        Vector2D(double x, double y);
+        Vector2D(float x, float y);
         Vector2D(const Vector2D& v);
         Vector2D(const Vector2D& from,const Vector2D & to);
     
@@ -19,13 +19,13 @@ class Vector2D {
         Vector2D operator+(const Vector2D & v) const;
         Vector2D& operator-=(const Vector2D & v);
         Vector2D operator-(const Vector2D & v) const;
-        Vector2D& operator*=(const double a);
-        Vector2D operator*(const double a)const;
-        Vector2D& operator/=(const double a);
-        Vector2D operator/(const double a)const;
-        friend Vector2D operator*(const double a,const Vector2D & v);
+        Vector2D& operator*=(const float a);
+        Vector2D operator*(const float a)const;
+        Vector2D& operator/=(const float a);
+        Vector2D operator/(const float a)const;
+        friend Vector2D operator*(const float a,const Vector2D & v);
 
-        double length()const;
+        float length()const;
         Vector2D& normalize();
 };
 #endif 

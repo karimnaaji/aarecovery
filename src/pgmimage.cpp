@@ -2,15 +2,13 @@
 
 PGMImage::PGMImage() : 
     length(0),
-    width(0),
-    grayscale(0) {
+    width(0) { 
     data = NULL;
 }
 
-PGMImage::PGMImage(int length_, int width_, int grayscale_) : 
+PGMImage::PGMImage(int length_, int width_) : 
     length(length_), 
-    width(width_), 
-    grayscale(grayscale_) {
+    width(width_) {
     data = new float[length*width];
 
     for(int i = 0; i < length; ++i) {
@@ -23,7 +21,6 @@ PGMImage::PGMImage(int length_, int width_, int grayscale_) :
 PGMImage::PGMImage(const PGMImage& image) {
     length = image.length;
     width = image.width;
-    grayscale = image.grayscale;
     data = new float[length*width];
 
     for(int i = 0; i < length; ++i) {
@@ -40,7 +37,6 @@ PGMImage& PGMImage::operator=(const PGMImage& image) {
         }
         length = image.length;
         width = image.width;
-        grayscale = image.grayscale;
 
         data = new float[length*width];
         for(int i = 0; i < length; ++i) {
@@ -72,10 +68,6 @@ unsigned int PGMImage::getLength() const {
 
 unsigned int PGMImage::getWidth() const {
     return width;
-}
-
-unsigned int PGMImage::getGrayscale() const {
-    return grayscale;
 }
 
 void PGMImage::threshold(float threshold, float newValue) {
