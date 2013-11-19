@@ -1,7 +1,7 @@
 #!/bin/bash
 cd media
-for f in `ls *.pgm`; do
-    out=`echo $f | sed 's/\.pgm/\.png/'`
+for f in `ls *.pgm *.ppm`; do
+    out=`echo $f | sed 's/\(\.pgm\)/\.png/g;s/\(\.ppm\)/\.png/g'`
     convert $f $out
     if [[ $? == 0 ]]
     then

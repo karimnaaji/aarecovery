@@ -11,6 +11,10 @@ int main() {
     PGMImage filtered(original);
     PGMImage recovered;
 
+    PPMImage image = loader.loadPPM("moreboxes_2");
+
+    loader.savePPM(image, "test");
+
     filtered.threshold(100, 255);
 
     std::cout << "Performing anti-aliasing recovery" << std::endl;
