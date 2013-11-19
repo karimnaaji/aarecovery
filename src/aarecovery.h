@@ -2,6 +2,7 @@
 #define __AA_RECOVERY_H__
 
 #include "pgmimage.h"
+#include "vector2d.h"
 
 class AARecovery {
     public:
