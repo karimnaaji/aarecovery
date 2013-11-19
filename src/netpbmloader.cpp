@@ -94,7 +94,11 @@ void NetPBMLoader::savePGM(PGMImage& pgmimage, std::string filename) {
     std::ofstream file(path.c_str(), std::ios::out | std::ios::binary);
 
     if(file.is_open()) {
+        time_t now = time(0);
+        char* dt = ctime(&now);
+
         file << "P5\n";
+        file << "# " << dt;
         file << pgmimage.getLength() << " " << pgmimage.getWidth() << "\n";
         file << COLOR_LEVELS << "\n";
 
@@ -114,7 +118,11 @@ void NetPBMLoader::savePPM(PPMImage& pgmimage, std::string filename) {
     std::ofstream file(path.c_str(), std::ios::out | std::ios::binary);
 
     if(file.is_open()) {
+        time_t now = time(0);
+        char* dt = ctime(&now);
+
         file << "P6\n";
+        file << "# " << dt;
         file << pgmimage.getLength() << " " << pgmimage.getWidth() << "\n";
         file << COLOR_LEVELS << "\n";
 

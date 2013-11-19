@@ -11,7 +11,7 @@ int main() {
     PGMImage filtered(original);
     PGMImage recovered;
 
-    PPMImage image = loader.loadPPM("mandrill");
+    PPMImage image = loader.loadPPM("test");
 
     loader.savePPM(image, "test");
 
