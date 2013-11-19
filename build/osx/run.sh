@@ -1,8 +1,10 @@
 #!/bin/bash
-make && ./aarecovery.out && ./convert.sh 
+make && ./aarecovery.out $1 && ./convert.sh $1
 
 if [[ $? == 0 ]]
 then
-    open media/photograph_filtered.png
-    open media/photograph_recovered.png
+    filtered=$1"_filtered"
+    recovered=$1"_recovered"
+    ./convert.sh $filtered 1
+    ./convert.sh $recovered 1
 fi

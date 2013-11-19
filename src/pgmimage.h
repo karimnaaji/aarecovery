@@ -2,7 +2,6 @@
 #define __PGM_IMAGE_H__
 
 #include <string>
-#include <iostream>
 
 class PGMImage {
     public:

@@ -11,6 +11,7 @@ s_NetPBMFileDesc* NetPBMLoader::read(std::string filename, std::string ext) {
     std::ifstream::off_type newStart;
     
     if(!file) {
+        std::cerr << "Error while opening " << path << std::endl;
         throw std::runtime_error("Can't open file" + path);
     }   
 
@@ -71,14 +72,15 @@ PGMImage NetPBMLoader::loadPGM(std::string filename) {
 PPMImage NetPBMLoader::loadPPM(std::string filename) {
     s_NetPBMFileDesc* fileDesc = read(filename, PPM_EXT);
     PPMImage image(fileDesc->length, fileDesc->width);
+    const int nbChannels = 3;
 
     for(int i = 0; i < image.getLength(); ++i) {
-        for(int j = 0; j < image.getWidth() * 3; j+=3) {
+        for(int j = 0; j < image.getWidth()*nbChannels; j+=3) {
             Vector3D color;
-            color.r = (float)(fileDesc->memblock[i*image.getLength()*3+j]);
-            color.g = (float)(fileDesc->memblock[i*image.getLength()*3+j+1]);
-            color.b = (float)(fileDesc->memblock[i*image.getLength()*3+j+2]);
-            image(i, j/3) = color;
+            color.r = (float)(fileDesc->memblock[i*image.getLength()*nbChannels+j]);
+            color.g = (float)(fileDesc->memblock[i*image.getLength()*nbChannels+j+1]);
+            color.b = (float)(fileDesc->memblock[i*image.getLength()*nbChannels+j+2]);
+            image(i, j/nbChannels) = color;
         }   
     }
 
@@ -133,10 +135,6 @@ void NetPBMLoader::savePPM(PPMImage& pgmimage, std::string filename) {
                 file << (char)(pgmimage(i, j).b);
             }
         }
-        std::cout << pgmimage(0,0).r;
-        std::cout << " " << pgmimage(0,0).g;
-        std::cout << " " << pgmimage(0,0).b;
-        std::cout << std::endl;
 
         file.close();
         std::cout << "Saved file " << path << std::endl;

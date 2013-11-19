@@ -1,27 +1,30 @@
 #include <iostream>
 
 #include "pgmimage.h"
+#include "ppmimage.h"
 #include "netpbmloader.h"
 #include "aarecovery.h"
-#include "vector3d.h"
 
-int main() {
+int main(int argc, char** argv) {
+    if(argc < 2) {
+        std::cerr << "Usage: " << argv[0] << " ppm_filename" << std::endl; 
+        std::cerr << "Note: the file should be included in the " + MEDIA_PATH + " folder" << std::endl; 
+        return EXIT_FAILURE;
+    }
+
+    std::string filename = std::string(argv[1]);
     NetPBMLoader loader;
-    PGMImage original = loader.loadPGM("photograph");
-    PGMImage filtered(original);
-    PGMImage recovered;
+    PPMImage original = loader.loadPPM(filename);
+    PPMImage filtered(original);
+    PPMImage recovered;
 
-    PPMImage image = loader.loadPPM("test");
-
-    loader.savePPM(image, "test");
-
-    filtered.threshold(100, 255);
+    //filtered.threshold(100, 255);
 
     std::cout << "Performing anti-aliasing recovery" << std::endl;
     recovered = AARecovery::PerformAA(original, filtered);
 
-    loader.savePGM(filtered, "photograph_filtered");
-    loader.savePGM(recovered, "photograph_recovered");
+    loader.savePPM(filtered, filename + std::string("_filtered"));
+    loader.savePPM(recovered, filename + std::string("_recovered"));
 
-    return 0;
+    return EXIT_SUCCESS;
 }

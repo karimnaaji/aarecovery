@@ -2,7 +2,6 @@
 #define __PPM_IMAGE_H__
 
 #include <string>
-#include <iostream>
 
 #include "vector3d.h"
 
