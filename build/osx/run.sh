@@ -1,7 +1,7 @@
 #!/bin/bash
-make && ./aarecovery.out $1 && ./convert.sh $1
+make && ./aarecovery.out $1 && ./convert.sh $1 
 
-if [[ $? == 0 ]]
+if [ $? == 0 ] && [ $2 -eq 1 ]
 then
     filtered=$1"_filtered"
     recovered=$1"_recovered"

@@ -69,3 +69,7 @@ unsigned int PPMImage::getLength() const {
 unsigned int PPMImage::getWidth() const {
     return width;
 }
+
+unsigned int PPMImage::getSize() const {
+    return width*length;
+}

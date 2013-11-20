@@ -1,6 +1,5 @@
 #include "netpbmloader.h"
 
-
 s_NetPBMFileDesc* NetPBMLoader::read(std::string filename, std::string ext) {
     s_NetPBMFileDesc* fileDesc = new s_NetPBMFileDesc();
     std::string path = MEDIA_PATH + filename + ext;

@@ -18,6 +18,7 @@ class PPMImage {
         unsigned int getLength() const;
         unsigned int getWidth() const;
         unsigned int getGrayscale() const;
+        unsigned int getSize() const;
     private:
         unsigned int length;
         unsigned int width;

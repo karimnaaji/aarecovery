@@ -12,6 +12,12 @@ Vector3D::Vector3D(float x_,float y_,float z_) {
     z = z_;
 }
 
+Vector3D::Vector3D(float val) {
+    x = val;
+    y = val;
+    z = val;
+}
+
 Vector3D::Vector3D(const Vector3D& v) {
     x = v.x;
     y = v.y;
@@ -81,13 +87,13 @@ Vector3D& Vector3D::operator/=(const float a) {
     return *this;
 }
 
-Vector3D Vector3D::operator/(const float a)const {
+Vector3D Vector3D::operator/(const float a) const {
     Vector3D t = *this;
     t /= a;
     return t;
 }
 
-Vector3D Vector3D::crossProduct(const Vector3D& v)const {
+Vector3D Vector3D::crossProduct(const Vector3D& v) const {
     Vector3D t;
     t.x = y*v.z - z*v.y;
     t.y = z*v.x - x*v.z;
@@ -95,7 +101,11 @@ Vector3D Vector3D::crossProduct(const Vector3D& v)const {
     return t;
 }
 
-float Vector3D::length()const {
+float Vector3D::dot(const Vector3D& v) const {
+    return x*v.x + y*v.y + z*v.z;
+}
+
+float Vector3D::length() const {
     return sqrt( x*x + y*y + z*z);
 }
 
