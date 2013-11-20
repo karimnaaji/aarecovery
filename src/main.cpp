@@ -30,9 +30,16 @@ int main(int argc, char** argv) {
     testImage(2,2) = Vector3D(180,230,230);
 
     //filtered.threshold(100, 255);
+    for(int i = 0; i < filtered.getLength(); ++i) {
+        for(int j = 0; j < filtered.getWidth(); ++j) {
+            Vector3D color = filtered(i,j);
+            filtered(i,j) = Vector3D((color.r + color.g + color.b) / 3);
+            if(filtered(i,j).r > 180) filtered(i,j) = Vector3D(255);
+        }
+    }
 
     std::cout << "Performing anti-aliasing recovery" << std::endl;
-    recovered = AARecovery::PerformAA(testImage, filtered);
+    recovered = AARecovery::PerformAA(original, filtered);
     loader.savePPM(testImage, "testImage8x8");
 
     loader.savePPM(filtered, filename + std::string("_filtered"));

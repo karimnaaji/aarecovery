@@ -101,6 +101,13 @@ Vector3D Vector3D::crossProduct(const Vector3D& v) const {
     return t;
 }
 
+Vector3D Vector3D::abs(Vector3D v) {
+    v.x = fabs(v.x);
+    v.y = fabs(v.y);
+    v.z = fabs(v.z);
+    return v;
+}
+
 float Vector3D::dot(const Vector3D& v) const {
     return x*v.x + y*v.y + z*v.z;
 }

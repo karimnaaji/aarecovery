@@ -29,6 +29,7 @@ class Vector3D {
         friend Vector3D operator*(const float a, const Vector3D& v);
 
         static Vector3D zero();
+        static Vector3D abs(Vector3D v);
         Vector3D crossProduct(const Vector3D& v) const;
         float length() const;
         float dot(const Vector3D& v) const;
