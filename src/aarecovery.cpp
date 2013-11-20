@@ -12,10 +12,14 @@ PPMImage AARecovery::PerformAA(const PPMImage& original, const PPMImage& filtere
             PPMImage neighborsAliased(3,3);
             Vector3D pixel = original(i,j);
             Vector3D pixelAlias = filtered(i,j);
-            float t = 0;
-            float metric = 0;
+            float alpha = 0;
+            float beta = 0;
+            float dp = 0;
+            float Gd = 0;
+            float ep = 0;
+            float Ge = 0;
 
-            // construct neighbors
+            // construct neighbors of aliased and original images
             for(int k = i-1; k <= i+1; ++k) {
                 for(int l = j-1; l <= j+1; ++l) {
                     neighbors((k-i)+1, (l-j)+1) = original(k,l);
@@ -39,26 +43,26 @@ PPMImage AARecovery::PerformAA(const PPMImage& original, const PPMImage& filtere
                 Vector3D ca = neighbors(minColorPos.x, minColorPos.y);
                 Vector3D cb = neighbors(maxColorPos.x, maxColorPos.y);
                 Vector3D cacb = cb - ca;
-                float d2cacb = cacb.dot(cacb);
-                t = (pixel - ca).dot(cacb) / d2cacb;
-                Vector3D d = pixel - (t * cacb) - ca;
-                float dist2 = d.dot(d);
-                metric = exp(-dist2/SIGMA_D);
+                Vector3D d;
+
+                alpha = (pixel - ca).dot(cacb) / cacb.dot(cacb);
+                d = pixel - (alpha * cacb) - ca;
+                dp = d.length();
+                Gd = exp(-pow(dp,2)/SIGMA_D);
             }
 
-            float edge = Sobel(neighbors);
-            edge *= Sobel(neighborsAliased);
-            float fEdge = 1 - exp(-edge*edge / SIGMA_E);
-            metric *= (fEdge >= 1e-2) ? 1 : 0;
-            metric *= fEdge;
+            float eo = Sobel(neighbors);
+            float ef = Sobel(neighborsAliased);
+            ep = ef * eo;
+            Ge = exp(-pow(ep,2)/SIGMA_E);
 
             Vector3D cbAliased = neighborsAliased(maxColorPos.x, maxColorPos.y);
             Vector3D caAliased = neighborsAliased(minColorPos.x, minColorPos.y);
-            Vector3D interpColor = caAliased * (1-t) + cbAliased * t;
 
-            recovered(i,j) = metric * interpColor + (1-metric) * pixelAlias;
-            sobel(i,j) = Vector3D(sqrt(edge));
+            beta = Gd * (1- Ge);
+            recovered(i,j) = beta * (caAliased * (1-alpha) + cbAliased * alpha) + (1-beta) * pixelAlias;
             maxVarDir(i,j) = varDir * 255;
+            sobel(i,j) = Vector3D(sqrt(eo));
         }
     }   
 

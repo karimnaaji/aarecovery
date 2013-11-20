@@ -29,8 +29,8 @@ s_NetPBMFileDesc* NetPBMLoader::read(std::string filename, std::string ext) {
         std::cout << line2 << std::endl;
     }
 
-    file >> fileDesc->width;
     file >> fileDesc->length;
+    file >> fileDesc->width;
     file >> fileDesc->colors;
 
     std::cout << " - Width: " << fileDesc->width << ", Length: " << fileDesc->length << std::endl;

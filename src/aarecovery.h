@@ -9,6 +9,9 @@
 #include <vector>
 #include <cmath>
 
+const float SIGMA_D = 0.2 * COLOR_LEVELS;
+const float SIGMA_E = 0.05;// * COLOR_LEVELS;
+
 class AARecovery {
     public:
         static PPMImage PerformAA(const PPMImage& original, const PPMImage& filtered);
