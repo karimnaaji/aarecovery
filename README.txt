@@ -5,7 +5,8 @@ http://research.microsoft.com/en-us/um/people/hoppe/aarecovery.pdf
 Images should be PPM format 24 bits.
 The program is looking for images from the media/ folder which should
 be located from working directory.
-Run : ./aarecovery.out ppm_file_name (without extension)
+Run : ./aarecovery.out -o original [-f filtered] (filenames without 
+extension)
 
 Copyright (C) 2013 Naaji Karim (karim.naaji@gmail.com)
 
