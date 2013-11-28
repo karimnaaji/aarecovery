@@ -1,5 +1,5 @@
 #!/bin/bash
-make && ./aarecovery.out $1 
+make && ./aarecovery.out -o $1 
 
 if [ $? == 0 ] && [ $2 -eq 1 ]
 then

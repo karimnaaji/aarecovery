@@ -29,7 +29,7 @@ class NetPBMLoader {
         void savePPM(PPMImage& ppmimage, std::string filename);
 
     private:
-        s_NetPBMFileDesc* read(std::string filename, std::string ext);
+        void read(std::string filename, std::string ext, s_NetPBMFileDesc* fileDesc);
 };
 
 #endif

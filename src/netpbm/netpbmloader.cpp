@@ -1,7 +1,6 @@
 #include "netpbmloader.h"
 
-s_NetPBMFileDesc* NetPBMLoader::read(std::string filename, std::string ext) {
-    s_NetPBMFileDesc* fileDesc = new s_NetPBMFileDesc();
+void NetPBMLoader::read(std::string filename, std::string ext, s_NetPBMFileDesc* fileDesc) {
     std::string path = MEDIA_PATH + filename + ext;
     std::string line1;
     std::string line2;
@@ -48,12 +47,11 @@ s_NetPBMFileDesc* NetPBMLoader::read(std::string filename, std::string ext) {
     file.close();
 
     fileDesc->memblock = (unsigned char*)memblock;
-
-    return fileDesc;
 }
 
 PGMImage NetPBMLoader::loadPGM(std::string filename) { 
-    s_NetPBMFileDesc* fileDesc = read(filename, PGM_EXT);   
+    s_NetPBMFileDesc* fileDesc = new s_NetPBMFileDesc();
+    read(filename, PGM_EXT, fileDesc);   
     PGMImage image(fileDesc->length, fileDesc->width);
 
     for(int i = 0; i < image.getLength(); ++i) {
@@ -69,7 +67,8 @@ PGMImage NetPBMLoader::loadPGM(std::string filename) {
 }
 
 PPMImage NetPBMLoader::loadPPM(std::string filename) {
-    s_NetPBMFileDesc* fileDesc = read(filename, PPM_EXT);
+    s_NetPBMFileDesc* fileDesc = new s_NetPBMFileDesc();
+    read(filename, PPM_EXT, fileDesc);
     PPMImage image(fileDesc->length, fileDesc->width);
     const int nbChannels = 3;
 

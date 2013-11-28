@@ -6,8 +6,13 @@ PPMImage AARecovery::PerformAA(const PPMImage& original, const PPMImage& filtere
     PPMImage maxVarDir(original.getLength(), original.getWidth());
     PPMImage sobel(original.getLength(), original.getWidth());
 
-    for(int i = 1; i < recovered.getLength() - 1; ++i) {
-        for(int j = 1; j < recovered.getWidth() - 1; ++j) {
+    for(int i = 0; i < recovered.getLength(); ++i) {
+        for(int j = 0; j < recovered.getWidth(); ++j) {
+            // don't treat border pixels
+            if(i == 0 || j == 0 || i == recovered.getLength()-1 || j == recovered.getWidth()-1) {
+                recovered(i,j) = filtered(i,j);
+                continue;
+            }
             PPMImage neighbors(3,3);
             PPMImage neighborsAliased(3,3);
             Vector3D pixel = original(i,j);
@@ -73,8 +78,8 @@ PPMImage AARecovery::PerformAA(const PPMImage& original, const PPMImage& filtere
 }
 
 float AARecovery::Sobel(const PPMImage& neighbors) {
-    Vector3D* h = new Vector3D[3];
-    Vector3D* v = new Vector3D[3];
+    Vector3D h[3];
+    Vector3D v[3];
 
     for(int i = 0; i < 3; ++i) {
         h[i] = neighbors(i,0) + 2*neighbors(i,1) + neighbors(i,2);
@@ -84,8 +89,6 @@ float AARecovery::Sobel(const PPMImage& neighbors) {
     Vector3D gx = (Vector3D::abs(h[1]-h[2]) + Vector3D::abs(h[0]-h[1])) / 4.0;
     Vector3D gy = (Vector3D::abs(v[1]-v[2]) + Vector3D::abs(v[0]-v[1])) / 4.0;
 
-    delete[] h;
-    delete[] v;
     return gx.dot(gx) + gy.dot(gy);
 }
 
