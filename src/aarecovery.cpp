@@ -28,11 +28,6 @@ PPMImage PerformAA(const PPMImage& original, const PPMImage& filtered) {
             for(int k = i-1; k <= i+1; ++k) {
                 for(int l = j-1; l <= j+1; ++l) {
                     neighbors((k-i)+1, (l-j)+1) = original(k,l);
-                }
-            }
-
-            for(int k = i-1; k <= i+1; ++k) {
-                for(int l = j-1; l <= j+1; ++l) {
                     neighborsAliased((k-i)+1, (l-j)+1) = filtered(k,l);
                 }
             }
@@ -65,6 +60,7 @@ PPMImage PerformAA(const PPMImage& original, const PPMImage& filtered) {
             Vector3D caAliased = neighborsAliased(minColorPos.x, minColorPos.y);
 
             beta = Gd * (1- Ge);
+            // final composition
             recovered(i,j) = beta * (caAliased * (1-alpha) + cbAliased * alpha) + (1-beta) * pixelAlias;
             maxVarDir(i,j) = varDir * 255;
             sobel(i,j) = Vector3D(sqrt(eo));
@@ -154,17 +150,21 @@ Vector3D MaximumVarianceDirection(PPMImage& neighbors) {
         }
     }
 
-    // expectation maximization iterations
     vDirection = Vector3D(average.normalize() + 1e-3);
-    for(int emIter = 0; emIter < 3; ++emIter) {
-        Vector3D t(1e-4);
-        for(int i = 0; i < neighbors.getSize(); ++i) {
-            t += dAverage[i] * dAverage[i].dot(vDirection);
-        }
-        vDirection = t.normalize();
-    }
+
+    EM(dAverage, 3, vDirection, neighbors.getSize());
 
     delete[] dAverage;
 
     return vDirection;
+}
+
+void EM(Vector3D* average, int n, Vector3D& direction, int nNeighbor) {
+    for(int i = 0; i < n; ++i) {
+        Vector3D t(1e-4);
+        for(int j = 0; j < nNeighbor; ++j) {
+            t += average[j] * average[j].dot(direction);
+        }
+        direction = t.normalize();
+    }
 }
