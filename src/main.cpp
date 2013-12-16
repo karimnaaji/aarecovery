@@ -4,6 +4,7 @@
 #include "ppmimage.h"
 #include "netpbmloader.h"
 #include "aarecovery.h"
+#include "effects.h"
 
 int error(char* argv0) {
     std::cerr << "Usage: " << argv0 << " -o original -f filtered" << std::endl; 
@@ -41,25 +42,40 @@ int main(int argc, char** argv) {
 
     if(filteredFilename.empty()) {
         int threshold;
+        char changeColor;
         filtered = PPMImage(original);
-        std::cout << "Perfoming a simple threshold on original image" << std::endl;
-        std::cout << "Threshold value : ";
-        std::cin >> threshold;
 
-        for(int i = 0; i < filtered.getLength(); ++i) {
-            for(int j = 0; j < filtered.getWidth(); ++j) {
-                Vector3D color = filtered(i,j);
-                filtered(i,j) = Vector3D((color.r + color.g + color.b) / 3);
-                if(filtered(i,j).r > threshold)
-                    filtered(i,j) = Vector3D(255);
-            }
+        std::cout << "Change color algorithm? (y/n) ";
+        std::cin >> changeColor;
+        if(changeColor == 'y') {
+            Vector3D color;
+            float maxDistance;
+            std::cout << "x : ";
+            std::cin >> color.x;
+            std::cout << "y : ";
+            std::cin >> color.y;
+            std::cout << "z : ";
+            std::cin >> color.z;
+            std::cout << "Max distance: ";
+            std::cin >> maxDistance;
+            //ChangeColor(filtered, (156, 198, 222), 30);
+            ChangeColor(filtered, color, maxDistance);
+        } else {
+            std::cout << "Perfoming a simple threshold on original image" << std::endl;
+            std::cout << "Threshold value : ";
+            std::cin >> threshold;
+
+            std::cout << "Performing thresholding" << std::endl;
+            Threshold(filtered, threshold);
         }
     } else {
         filtered = loader.loadPPM(filteredFilename);
     }
 
     std::cout << "Performing anti-aliasing recovery" << std::endl;
-    recovered = AARecovery::PerformAA(original, filtered);
+    const clock_t begin = clock();
+    recovered = PerformAA(original, filtered);
+    std::cout << "Time : " << (float)(clock () - begin) /  CLOCKS_PER_SEC << "s." << std::endl;
 
     loader.savePPM(filtered, originalFilename + std::string("_filtered"));
     loader.savePPM(recovered, originalFilename + std::string("_recovered"));

@@ -24,6 +24,7 @@ class Vector3D {
         Vector3D operator-(const Vector3D& v) const;        
         Vector3D& operator*=(const float a);
         Vector3D operator*(const float a)const;
+        Vector3D operator*(const Vector3D& v) const;
         Vector3D& operator/=(const float a);
         Vector3D operator/(const float a)const;
         friend Vector3D operator*(const float a, const Vector3D& v);

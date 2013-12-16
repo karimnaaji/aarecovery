@@ -76,8 +76,12 @@ Vector3D Vector3D::operator*(const float a) const {
     return t;
 }
 
-Vector3D operator*(const float a,const Vector3D& v) {
+Vector3D operator*(const float a ,const Vector3D& v) {
     return Vector3D(v.x*a,v.y*a,v.z*a);
+}
+
+Vector3D Vector3D::operator*(const Vector3D& v) const {
+    return Vector3D(x*v.x, y*v.y, z*v.z);
 }
 
 Vector3D& Vector3D::operator/=(const float a) {
@@ -113,7 +117,7 @@ float Vector3D::dot(const Vector3D& v) const {
 }
 
 float Vector3D::length() const {
-    return sqrt( x*x + y*y + z*z);
+    return sqrt(x*x + y*y + z*z);
 }
 
 Vector3D& Vector3D::normalize() {

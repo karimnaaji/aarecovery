@@ -1,6 +1,6 @@
 #include "aarecovery.h"
 
-PPMImage AARecovery::PerformAA(const PPMImage& original, const PPMImage& filtered) {
+PPMImage PerformAA(const PPMImage& original, const PPMImage& filtered) {
     NetPBMLoader loader;
     PPMImage recovered(original.getLength(), original.getWidth());
     PPMImage maxVarDir(original.getLength(), original.getWidth());
@@ -53,13 +53,13 @@ PPMImage AARecovery::PerformAA(const PPMImage& original, const PPMImage& filtere
                 alpha = (pixel - ca).dot(cacb) / cacb.dot(cacb);
                 d = pixel - (alpha * cacb) - ca;
                 dp = d.length();
-                Gd = exp(-pow(dp,2)/SIGMA_D);
+                Gd = GAUSS(dp, SIGMA_D);
             }
 
             float eo = Sobel(neighbors);
             float ef = Sobel(neighborsAliased);
             ep = ef * eo;
-            Ge = exp(-pow(ep,2)/SIGMA_E);
+            Ge = GAUSS(ep, SIGMA_E);
 
             Vector3D cbAliased = neighborsAliased(maxColorPos.x, maxColorPos.y);
             Vector3D caAliased = neighborsAliased(minColorPos.x, minColorPos.y);
@@ -77,7 +77,7 @@ PPMImage AARecovery::PerformAA(const PPMImage& original, const PPMImage& filtere
     return recovered;
 }
 
-float AARecovery::Sobel(const PPMImage& neighbors) {
+float Sobel(const PPMImage& neighbors) {
     Vector3D h[3];
     Vector3D v[3];
 
@@ -92,7 +92,7 @@ float AARecovery::Sobel(const PPMImage& neighbors) {
     return gx.dot(gx) + gy.dot(gy);
 }
 
-bool AARecovery::FindExtremeColors(const PPMImage& neighbors, const Vector3D& varDir, Vector2D& maxColorPos, Vector2D& minColorPos) {
+bool FindExtremeColors(const PPMImage& neighbors, const Vector3D& varDir, Vector2D& maxColorPos, Vector2D& minColorPos) {
     float tmin = 1.0;
     float tmax = -1.0;
 
@@ -132,7 +132,7 @@ bool AARecovery::FindExtremeColors(const PPMImage& neighbors, const Vector3D& va
     return tmin <= 0 && tmax >= 0 && abs(tmin - tmax) > EPSILON;
 }
 
-Vector3D AARecovery::MaximumVarianceDirection(PPMImage& neighbors) {
+Vector3D MaximumVarianceDirection(PPMImage& neighbors) {
     // the distance vector from the average value of neighbors
     Vector3D* dAverage = new Vector3D[neighbors.getSize()];
     // the average value computed considering the neighbors
