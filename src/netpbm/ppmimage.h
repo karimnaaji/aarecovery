@@ -15,14 +15,14 @@ class PPMImage {
     
         Vector3D operator()(int i, int j) const;
         Vector3D& operator()(int i, int j);
-        unsigned int getLength() const;
-        unsigned int getWidth() const;
-        unsigned int getGrayscale() const;
-        unsigned int getSize() const;
+        int getLength() const;
+        int getWidth() const;
+        int getGrayscale() const;
+        int getSize() const;
     private:
-        unsigned int length;
-        unsigned int width;
-        unsigned int grayscale;
+        int length;
+        int width;
+        int grayscale;
         Vector3D* data;
 };
 

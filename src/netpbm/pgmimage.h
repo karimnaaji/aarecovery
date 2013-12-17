@@ -13,13 +13,13 @@ class PGMImage {
     
         float operator()(int i, int j) const;
         float& operator()(int i, int j);
-        unsigned int getLength() const;
-        unsigned int getWidth() const;
+        int getLength() const;
+        int getWidth() const;
 
         void threshold(float threshold, float newValue);
     private:
-        unsigned int length;
-        unsigned int width;
+        int length;
+        int width;
         float* data;
 };
 

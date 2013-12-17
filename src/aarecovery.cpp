@@ -17,6 +17,14 @@ PPMImage PerformAA(const PPMImage& original, const PPMImage& filtered) {
             PPMImage neighborsAliased(3,3);
             Vector3D pixel = original(i,j);
             Vector3D pixelAlias = filtered(i,j);
+            // colors are changing most rapidly considering this direction
+            Vector3D varDir;
+            // the distance vector from the average value of neighbors
+            Vector3D dAverage[9];
+            // the average value computed considering the neighbors
+            Vector3D average;
+
+            // parameters to compute recovery
             float alpha = 0;
             float beta = 0;
             float dp = 0;
@@ -32,14 +40,29 @@ PPMImage PerformAA(const PPMImage& original, const PPMImage& filtered) {
                 }
             }
 
-            // colors are changing most rapidly considering this direction
-            Vector3D varDir = MaximumVarianceDirection(neighbors);
+            // compute the average
+            for(int k = 0; k < neighbors.getLength(); ++k) {
+                for(int l = 0; l < neighbors.getWidth(); ++l) {
+                    average += neighbors(k,l);
+                }
+            }
+            average /= neighbors.getSize();
+            // compute the distance from the average color value
+            for(int k = 0; k < neighbors.getLength(); ++k) {
+                for(int l = 0; l < neighbors.getWidth(); ++l) {
+                    dAverage[k*neighbors.getLength()+l] = neighbors(k,l) - average;
+                }
+            }
+
+            varDir = Vector3D(average.normalize() + EPSILON);
+            EM(dAverage, 3, varDir, neighbors.getSize());
+
 
             Vector2D maxColorPos;
             Vector2D minColorPos;
 
             // compute the two maximum colors along the straight line directed by varDir
-            if(FindExtremeColors(neighbors, varDir, maxColorPos, minColorPos)) {
+            if(ExtremeColors(neighbors, varDir, maxColorPos, minColorPos)) {
                 Vector3D ca = neighbors(minColorPos.x, minColorPos.y);
                 Vector3D cb = neighbors(maxColorPos.x, maxColorPos.y);
                 Vector3D cacb = cb - ca;
@@ -88,7 +111,7 @@ float Sobel(const PPMImage& neighbors) {
     return gx.dot(gx) + gy.dot(gy);
 }
 
-bool FindExtremeColors(const PPMImage& neighbors, const Vector3D& varDir, Vector2D& maxColorPos, Vector2D& minColorPos) {
+bool ExtremeColors(const PPMImage& neighbors, const Vector3D& varDir, Vector2D& maxColorPos, Vector2D& minColorPos) {
     float tmin = 1.0;
     float tmax = -1.0;
 
@@ -125,38 +148,7 @@ bool FindExtremeColors(const PPMImage& neighbors, const Vector3D& varDir, Vector
             }
         }
     }
-    return tmin <= 0 && tmax >= 0 && abs(tmin - tmax) > EPSILON;
-}
-
-Vector3D MaximumVarianceDirection(PPMImage& neighbors) {
-    // the distance vector from the average value of neighbors
-    Vector3D* dAverage = new Vector3D[neighbors.getSize()];
-    // the average value computed considering the neighbors
-    Vector3D average;
-    // the variance direction
-    Vector3D vDirection;
-
-    // compute the average
-    for(int i = 0; i < neighbors.getLength(); ++i) {
-        for(int j = 0; j < neighbors.getWidth(); ++j) {
-            average += neighbors(i,j);
-        }
-    }
-    average /= neighbors.getSize();
-    // compute the distance from the average color value
-    for(int i = 0; i < neighbors.getLength(); ++i) {
-        for(int j = 0; j < neighbors.getWidth(); ++j) {
-            dAverage[i*neighbors.getLength()+j] = neighbors(i,j) - average;
-        }
-    }
-
-    vDirection = Vector3D(average.normalize() + 1e-3);
-
-    EM(dAverage, 3, vDirection, neighbors.getSize());
-
-    delete[] dAverage;
-
-    return vDirection;
+    return tmin <= 0 && tmax >= 0 && std::abs(tmin - tmax) > EPSILON;
 }
 
 void EM(Vector3D* average, int n, Vector3D& direction, int nNeighbor) {

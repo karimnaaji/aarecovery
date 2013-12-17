@@ -62,11 +62,11 @@ float& PGMImage::operator()(int i, int j) {
     return data[i*width+j];
 }
 
-unsigned int PGMImage::getLength() const {
+int PGMImage::getLength() const {
     return length;
 }
 
-unsigned int PGMImage::getWidth() const {
+int PGMImage::getWidth() const {
     return width;
 }
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 
 #include "pgmimage.h"
 #include "ppmimage.h"
@@ -7,7 +8,7 @@
 #include "effects.h"
 
 int error(char* argv0) {
-    std::cerr << "Usage: " << argv0 << " -o original -f filtered" << std::endl; 
+    std::cerr << "Usage: " << argv0 << " -o original [-f filtered]" << std::endl; 
     std::cerr << "Note: the file should be included in the " + MEDIA_PATH + " folder ";
     std::cerr << "and should be PPM (24bits) format" << std::endl; 
     return EXIT_FAILURE;

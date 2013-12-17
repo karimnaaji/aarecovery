@@ -15,8 +15,7 @@ const float SIGMA_E = 0.05 * COLOR_LEVELS;
 
 PPMImage PerformAA(const PPMImage& original, const PPMImage& filtered);
 float Sobel(const PPMImage& neighbors);
-Vector3D MaximumVarianceDirection(PPMImage& neighbors);
-bool FindExtremeColors(const PPMImage& neighbors, const Vector3D& varDir, Vector2D& maxColorPos, Vector2D& minColorPos);
+bool ExtremeColors(const PPMImage& neighbors, const Vector3D& varDir, Vector2D& maxColorPos, Vector2D& minColorPos);
 void EM(Vector3D* average, int n, Vector3D& direction, int nNeighbor);
 
 #endif

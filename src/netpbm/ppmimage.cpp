@@ -62,14 +62,14 @@ Vector3D& PPMImage::operator()(int i, int j) {
     return data[i*width+j];
 }
 
-unsigned int PPMImage::getLength() const {
+int PPMImage::getLength() const {
     return length;
 }
 
-unsigned int PPMImage::getWidth() const {
+int PPMImage::getWidth() const {
     return width;
 }
 
-unsigned int PPMImage::getSize() const {
+int PPMImage::getSize() const {
     return width*length;
 }
