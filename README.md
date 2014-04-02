@@ -14,8 +14,7 @@ The program is looking for images from the media/ folder which should
 be located in the working directory.
 
 ```bash
-./aarecovery.out -o original [-f filtered] # filenames without 
-extension
+./aarecovery.out -o original [-f filtered] # filenames without extension
 ````
 
 results
