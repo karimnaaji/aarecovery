@@ -45,12 +45,12 @@ The following images were zoomed to assess the results.
  
 Original image:
 
-![original](https://bitbucket.org/cewxel/aarecovery/wiki/aa_original.png)
+![original](http://karim.naaji.fr/images/aa_original.png)
 
 Non-linear filter performed on it (here simple thresholding):
 
-![original](https://bitbucket.org/cewxel/aarecovery/wiki/aa_filtered.png)
+![original](http://karim.naaji.fr/images/aa_filtered.png)
 
 The result of performing anti-aliasing recovery:
 
-![original](https://bitbucket.org/cewxel/aarecovery/wiki/aa_recovered.png)
+![original](http://karim.naaji.fr/images/aa_recovered.png)
